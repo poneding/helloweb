@@ -1,11 +1,11 @@
-FROM golang:alpine AS builder
+FROM --platform=$TARGETPLATFORM golang:alpine AS builder
 
 WORKDIR /app
 
 COPY . .
 RUN go mod download 
-RUN go build -o ash main.go
-
+ARG TARGETPLATFORM TARGETOS TARGETARCH
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o ash main.go
 
 FROM alpine
 

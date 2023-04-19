@@ -1,4 +1,4 @@
-name: commit
+name: build
 
 on:
   push:
@@ -22,10 +22,6 @@ jobs:
           registry: ${{ secrets.ALIYUN_REGISTRY_SERVER }}
           username: ${{ secrets.ALIYUN_REGISTRY_USER }}
           password: ${{ secrets.ALIYUN_REGISTRY_TOKEN }}
-
-      - name: Set ENV
-        run: |
-          echo "VERSION=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
